@@ -15,27 +15,29 @@ export class AuthService {
     const user = await this.usersService.findOneByEmail(email);
 
     if (!user) {
-      throw new UnauthorizedException('Correo invalido ');
+      throw new UnauthorizedException('Correo inválido');
     }
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
 
     if (!isPasswordValid) {
-      throw new UnauthorizedException('Contraseña invalida');
+      throw new UnauthorizedException('Contraseña inválida');
     }
 
+    // Generamos el payload del JWT
     const payload = {
       email: user.email,
       rol: user.rol,
       nombre: `${user.nombre} ${user.apellidoPaterno} ${user.apellidoMaterno}`,
     };
 
+    // Firmamos el JWT
     const token = await this.jwtService.signAsync(payload);
 
     return {
       email: user.email,
       rol: user.rol,
-      token: token,
+      token, // Retornamos el JWT
       nombre: `${user.nombre} ${user.apellidoPaterno} ${user.apellidoMaterno}`,
     };
   }
