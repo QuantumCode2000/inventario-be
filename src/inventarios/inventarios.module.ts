@@ -9,4 +9,4 @@ import { Inventario } from './entities/inventario.entity';
   controllers: [InventariosController],
   providers: [InventariosService],
 })
-export class InventariosModule { }
+export class InventariosModule {}

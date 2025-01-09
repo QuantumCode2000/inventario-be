@@ -1,35 +1,47 @@
-import { IsString, IsDateString, IsOptional, Length } from 'class-validator';
+import { IsString, Length } from 'class-validator';
 
 export class CreateInventarioDto {
   @IsString()
   @Length(1, 50)
-  iDLamina: string;
+  codigoProducto: string; // Código único del producto
+
+  @IsString()
+  @Length(1, 100)
+  descripcion: string; // Descripción del producto
 
   @IsString()
   @Length(1, 50)
-  tipoLamina: string;
+  categoria: string; // Categoría del producto
 
   @IsString()
   @Length(1, 50)
-  dimensionesLamina: string;
+  cantidadDisponible: string; // Cantidad disponible en inventario
 
   @IsString()
   @Length(1, 50)
-  cantidadDisponible: string;
+  precioUnitario: string; // Precio unitario del producto
+
+  @IsString()
+  @Length(1, 20)
+  estado: string; // Estado del producto (disponible, agotado, etc.)
+
+  @IsString()
+  @Length(1, 100)
+  registradoPor: string; // Usuario que registró el producto
 
   @IsString()
   @Length(1, 50)
-  espesor: string;
+  chofer: string; // Nombre del chofer del camión
 
   @IsString()
   @Length(1, 50)
-  color: string;
-
-  @IsDateString()
-  @Length(1, 50)
-  fechaIngreso: string;
+  camion: string; // Detalles del camión (placa, modelo, etc.)
 
   @IsString()
   @Length(1, 50)
-  estado: string;
+  nroNotaRemision: string; // Número de la nota de remisión
+
+  @IsString()
+  @Length(1, 500)
+  detalle: string; // Detalles adicionales sobre el producto
 }
