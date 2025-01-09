@@ -54,6 +54,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Usuario } from './entities/usuario.entity';
 import * as bcrypt from 'bcrypt';
+import { RolEnum } from './entities/usuario.entity';
+import { EstadoEnum } from './entities/usuario.entity';
 
 @Injectable()
 export class UsuariosService implements OnModuleInit {
@@ -66,7 +68,7 @@ export class UsuariosService implements OnModuleInit {
   async onModuleInit() {
     // Verifica si ya existe un usuario admin, para no crear uno cada vez que se inicia la aplicación
     const adminExists = await this.usuariosRepository.findOneBy({
-      rol: 'admin',
+      rol: RolEnum.ADMIN,
     });
 
     if (!adminExists) {
@@ -79,8 +81,8 @@ export class UsuariosService implements OnModuleInit {
         apellidoMaterno: 'Admin',
         email: 'admin@dominio.com',
         password: 'admin123', // Asegúrate de cambiarlo a un valor seguro
-        rol: 'admin',
-        estado: 'activo',
+        rol: RolEnum.ADMIN,
+        estado: EstadoEnum.ACTIVO,
       };
 
       // Crea y guarda el usuario administrador
