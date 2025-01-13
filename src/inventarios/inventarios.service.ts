@@ -1,4 +1,9 @@
-import { Injectable, ConflictException, OnModuleInit } from '@nestjs/common';
+import {
+  Injectable,
+  ConflictException,
+  OnModuleInit,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateInventarioDto } from './dto/create-inventario.dto';
 import { UpdateInventarioDto } from './dto/update-inventario.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -12,56 +17,34 @@ export class InventariosService implements OnModuleInit {
     private inventariosRepository: Repository<Inventario>,
   ) {}
 
-  // Método que se ejecuta cuando el módulo se inicia
+  // Método que se ejecuta al iniciar el módulo
   async onModuleInit() {
     // Verifica si ya existe un inventario predeterminado
     const inventarioExists = await this.inventariosRepository.findOneBy({
-      codigoProducto: 'PROD0001', // Cambia esto por un identificador único para tu inventario predeterminado
+      codigo: 'DEFAULT001', // Código único para el inventario predeterminado
     });
 
     if (!inventarioExists) {
-      // Si no existe, crea un nuevo inventario predeterminado
+      // Si no existe, crea un inventario predeterminado
       const defaultInventario: CreateInventarioDto = {
-        codigoProducto: 'PROD0001', // Un identificador único
-        descripcion: 'Producto Predeterminado',
-        categoria: 'Categoria A',
-        cantidadDisponible: '100',
-        precioUnitario: '50',
-        estado: 'disponible',
-        registradoPor: 'Sistema',
-        chofer: 'No Asignado',
-        camion: 'No Asignado',
-        nroNotaRemision: 'NR001',
-        detalle: 'Producto de ejemplo creado al iniciar la aplicación',
+        item: 'Producto Predeterminado',
+        codigo: 'DEFAULT001',
+        cantidad: 100,
+        localizacion: 'Almacén Central',
+        ubicacion: 'Estante A1',
       };
 
-      // Crea y guarda el inventario predeterminado
       await this.create(defaultInventario);
     }
   }
 
-  // async create(createInventarioDto: CreateInventarioDto) {
-  //   const { codigoProducto } = createInventarioDto;
-
-  //   // Verifica si el código de producto ya existe en la base de datos
-  //   const existingProducto = await this.inventariosRepository.findOne({
-  //     where: { codigoProducto },
-  //   });
-
-  //   if (existingProducto) {
-  //     throw new Error('El código de producto ya existe.');
-  //   }
-
-  //   const inventario = this.inventariosRepository.create(createInventarioDto);
-  //   return await this.inventariosRepository.save(inventario);
-  // }
-
+  // Crear un nuevo inventario
   async create(createInventarioDto: CreateInventarioDto) {
-    const { codigoProducto } = createInventarioDto;
+    const { codigo } = createInventarioDto;
 
-    // Verifica si el código de producto ya existe en la base de datos
+    // Verificar si ya existe un producto con el mismo código
     const existingProducto = await this.inventariosRepository.findOne({
-      where: { codigoProducto },
+      where: { codigo },
     });
 
     if (existingProducto) {
@@ -75,19 +58,30 @@ export class InventariosService implements OnModuleInit {
     return await this.inventariosRepository.save(inventario);
   }
 
+  // Obtener todos los inventarios
   async findAll() {
     return await this.inventariosRepository.find();
   }
 
+  // Obtener un inventario por ID
   async findOne(id: number) {
-    return await this.inventariosRepository.findOneBy({ id });
+    const inventario = await this.inventariosRepository.findOneBy({ id });
+    if (!inventario) {
+      throw new NotFoundException(`Inventario con ID ${id} no encontrado.`);
+    }
+    return inventario;
   }
 
+  // Actualizar un inventario por ID
   async update(id: number, updateInventarioDto: UpdateInventarioDto) {
-    return await this.inventariosRepository.update(id, updateInventarioDto);
+    const inventario = await this.findOne(id); // Asegurarse de que el inventario existe
+    Object.assign(inventario, updateInventarioDto);
+    return await this.inventariosRepository.save(inventario);
   }
 
+  // Eliminar un inventario de forma lógica
   async remove(id: number) {
-    return await this.inventariosRepository.softDelete(id);
+    const inventario = await this.findOne(id); // Asegurarse de que el inventario existe
+    return await this.inventariosRepository.softDelete(inventario.id);
   }
 }

@@ -1,11 +1,16 @@
-import { Entity, PrimaryGeneratedColumn, Column, DeleteDateColumn, BeforeInsert } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  DeleteDateColumn,
+  BeforeInsert,
+} from 'typeorm';
 import * as bcrypt from 'bcrypt';
 
 // Enum para el rol
 export enum RolEnum {
   ADMIN = 'administrador',
   USER = 'usuario',
-
 }
 
 // Enum para el estado
@@ -39,6 +44,9 @@ export class Usuario {
 
   @Column({ type: 'varchar', length: 255 })
   password: string;
+
+  @Column({ type: 'varchar', length: 20 })
+  cargo: string;
 
   @Column({ type: 'enum', enum: RolEnum })
   rol: RolEnum;

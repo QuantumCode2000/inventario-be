@@ -7,16 +7,18 @@ async function bootstrap() {
   const logger = new Logger('Bootstrap');
 
   app.enableCors();
-
   app.setGlobalPrefix('api/v1');
 
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
-
       forbidNonWhitelisted: true,
-
       transform: true,
+      // Opción adicional para permitir el log de errores de validación
+      exceptionFactory: (errors) => {
+        logger.error('Validation failed:', errors);
+        return errors;
+      },
     }),
   );
 

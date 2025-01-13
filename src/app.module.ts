@@ -7,6 +7,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { InventariosModule } from './inventarios/inventarios.module';
 import { PedidosModule } from './pedidos/pedidos.module';
+import { ItemsModule } from './items/items.module';
+import { SalidasModule } from './salidas/salidas.module';
+import { EntradasModule } from './entradas/entradas.module';
 
 @Module({
   imports: [
@@ -28,6 +31,9 @@ import { PedidosModule } from './pedidos/pedidos.module';
     AuthModule,
     InventariosModule,
     PedidosModule,
+    ItemsModule,
+    SalidasModule,
+    EntradasModule,
   ],
   controllers: [],
   providers: [],

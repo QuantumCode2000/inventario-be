@@ -31,6 +31,10 @@ export class CreateUsuarioDto {
   @Length(8, 255)
   password: string;
 
+  @IsString()
+  @Length(1, 20)
+  cargo: string;
+
   @IsEnum(RolEnum)
   rol: RolEnum;
 

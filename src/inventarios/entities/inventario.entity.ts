@@ -1,7 +1,8 @@
 import {
   Entity,
-  PrimaryGeneratedColumn,
   Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
   CreateDateColumn,
   UpdateDateColumn,
   DeleteDateColumn,
@@ -10,51 +11,29 @@ import {
 @Entity()
 export class Inventario {
   @PrimaryGeneratedColumn()
-  id: number;
+  id: number; // Identificador único del inventario
 
-  @Column({
-    type: 'varchar',
-    length: 50,
-    unique: true,
-  })
-  codigoProducto: string; // Código único del producto
+  @Column({ nullable: false })
+  item: string; // Relación con la entidad (producto)
 
-  @Column({ type: 'varchar', length: 100 })
-  descripcion: string; // Descripción del producto
+  @Column({ nullable: false })
+  codigo: string; // Código único del item
 
-  @Column({ type: 'varchar', length: 50 })
-  categoria: string; // Categoría del producto
+  @Column('decimal', { precision: 10, scale: 2 })
+  cantidad: number; // Cantidad en inventario, tipo decimal (permitiendo fracciones como 0.5 litros, 1.25 kg, etc.)
 
-  @Column({ type: 'varchar' })
-  cantidadDisponible: string; // Cantidad disponible en inventario
+  @Column({ nullable: false })
+  localizacion: string; // Localización principal (almacén, tienda, etc.)
 
-  @Column({ type: 'varchar' })
-  precioUnitario: string; // Precio unitario del producto
-
-  @Column({ type: 'varchar', length: 20 })
-  estado: string; // Estado del producto (disponible, agotado, etc.)
-
-  @Column({ type: 'varchar', length: 100 })
-  registradoPor: string; // Usuario que registró el producto
-
-  @Column({ type: 'varchar', length: 50 })
-  chofer: string; // Nombre del chofer del camión
-
-  @Column({ type: 'varchar', length: 50 })
-  camion: string; // Detalles del camión (placa, modelo, etc.)
-
-  @Column({ type: 'varchar', length: 50 })
-  nroNotaRemision: string; // Número de la nota de remisión
-
-  @Column({ type: 'text' })
-  detalle: string; // Detalles adicionales sobre el producto
+  @Column({ nullable: true })
+  ubicacion: string; // Detalles adicionales sobre la ubicación del producto dentro de la localización
 
   @CreateDateColumn()
-  createdAt: Date;
+  createdAt: Date; // Fecha de creación (automático)
 
   @UpdateDateColumn()
-  updatedAt: Date;
+  updatedAt: Date; // Fecha de última actualización (automático)
 
   @DeleteDateColumn()
-  deletedAt: Date;
+  deletedAt: Date; // Fecha de eliminación lógica (automático)
 }
