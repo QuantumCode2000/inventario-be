@@ -38,5 +38,9 @@ export class CreateSalidaDto {
 
   @IsOptional()
   @IsString()
+  unidadMedida?: string; // Unidad de medida del producto (Ej: Litros, Kilogramos)
+
+  @IsOptional()
+  @IsString()
   entregadoPor?: string; // Quién entrega el ítem (opcional, si aplica en el flujo de salida)
 }

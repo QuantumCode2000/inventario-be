@@ -7,18 +7,6 @@ import {
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 
-// Enum para el rol
-export enum RolEnum {
-  ADMIN = 'administrador',
-  USER = 'usuario',
-}
-
-// Enum para el estado
-export enum EstadoEnum {
-  ACTIVO = 'activo',
-  INACTIVO = 'inactivo',
-}
-
 @Entity()
 export class Usuario {
   @PrimaryGeneratedColumn()
@@ -48,11 +36,11 @@ export class Usuario {
   @Column({ type: 'varchar', length: 20 })
   cargo: string;
 
-  @Column({ type: 'enum', enum: RolEnum })
-  rol: RolEnum;
+  @Column()
+  rol: string;
 
-  @Column({ type: 'enum', enum: EstadoEnum })
-  estado: EstadoEnum;
+  @Column()
+  estado: string;
 
   @DeleteDateColumn()
   deletedAt: Date;

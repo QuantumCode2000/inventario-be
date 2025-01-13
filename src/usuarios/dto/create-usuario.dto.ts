@@ -1,5 +1,4 @@
-import { IsString, IsEmail, Length, IsEnum, IsOptional } from 'class-validator';
-import { RolEnum, EstadoEnum } from '../entities/usuario.entity';
+import { IsString, IsEmail, Length, IsOptional } from 'class-validator';
 
 export class CreateUsuarioDto {
   @IsString()
@@ -28,16 +27,16 @@ export class CreateUsuarioDto {
   email: string;
 
   @IsString()
-  @Length(8, 255)
+  @Length(7, 255)
   password: string;
 
   @IsString()
   @Length(1, 20)
   cargo: string;
 
-  @IsEnum(RolEnum)
-  rol: RolEnum;
+  @IsString()
+  rol: string;
 
-  @IsEnum(EstadoEnum)
-  estado: EstadoEnum;
+  @IsString()
+  estado: string;
 }

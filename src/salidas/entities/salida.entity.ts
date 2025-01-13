@@ -36,6 +36,9 @@ export class Salida {
   @Column({ nullable: true })
   entregadoPor: string; // Quién entrega el ítem (opcional, si aplica en el flujo de salida)
 
+  @Column({ nullable: true })
+  unidadMedida: string; // Unidad de medida (ej. Litros, Kilos, Unidades)
+
   @CreateDateColumn()
   createdAt: Date; // Fecha de creación (automático)
 
