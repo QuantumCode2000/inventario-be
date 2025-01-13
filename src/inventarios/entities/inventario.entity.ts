@@ -27,6 +27,9 @@ export class Inventario {
   @Column({ nullable: true })
   ubicacion: string; // Detalles adicionales sobre la ubicación del producto dentro de la localización
 
+  @Column({ nullable: true })
+  unidadMedida: string; // Unidad de medida (ej. Litros, Kilos, Unidades)
+
   @CreateDateColumn()
   createdAt: Date; // Fecha de creación (automático)
 

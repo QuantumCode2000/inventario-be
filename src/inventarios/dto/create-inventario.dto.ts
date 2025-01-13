@@ -20,6 +20,10 @@ export class CreateInventarioDto {
   cantidad: number;
 
   @IsString()
+  @MaxLength(50) // Máxima longitud para las observaciones
+  unidadMedida;
+
+  @IsString()
   @MaxLength(100) // Máxima longitud para la localización
   localizacion: string;
 

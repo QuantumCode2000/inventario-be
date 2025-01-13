@@ -10,7 +10,7 @@ export class LoginDto {
   email: string;
 
   @IsString({ message: 'La contraseña debe ser una cadena de texto' })
-  @MinLength(8, { message: 'La contraseña debe tener al menos 8 caracteres' })
+  @MinLength(7, { message: 'La contraseña debe tener al menos 8 caracteres' })
   @MaxLength(255, {
     message: 'La contraseña no puede exceder los 255 caracteres',
   })

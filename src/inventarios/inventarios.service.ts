@@ -31,6 +31,7 @@ export class InventariosService implements OnModuleInit {
         codigo: 'DEFAULT001',
         cantidad: 100,
         localizacion: 'Almacén Central',
+        unidadMedida: 'Unidad',
         ubicacion: 'Estante A1',
       };
 

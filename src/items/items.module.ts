@@ -3,9 +3,9 @@ import { ItemsService } from './items.service';
 import { ItemsController } from './items.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Item } from './entities/item.entity';
-
+import { InventariosModule } from 'src/inventarios/inventarios.module';
 @Module({
-  imports: [TypeOrmModule.forFeature([Item])],
+  imports: [TypeOrmModule.forFeature([Item]), InventariosModule],
   controllers: [ItemsController],
   providers: [ItemsService],
 })
