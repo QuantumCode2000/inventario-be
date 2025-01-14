@@ -11,33 +11,33 @@ import { Repository } from 'typeorm';
 import { Inventario } from './entities/inventario.entity';
 
 @Injectable()
-export class InventariosService implements OnModuleInit {
+export class InventariosService {
   constructor(
     @InjectRepository(Inventario)
     private inventariosRepository: Repository<Inventario>,
   ) {}
 
   // Método que se ejecuta al iniciar el módulo
-  async onModuleInit() {
-    // Verifica si ya existe un inventario predeterminado
-    const inventarioExists = await this.inventariosRepository.findOneBy({
-      codigo: 'DEFAULT001', // Código único para el inventario predeterminado
-    });
+  // async onModuleInit() {
+  //   // Verifica si ya existe un inventario predeterminado
+  //   const inventarioExists = await this.inventariosRepository.findOneBy({
+  //     codigo: 'DEFAULT001', // Código único para el inventario predeterminado
+  //   });
 
-    if (!inventarioExists) {
-      // Si no existe, crea un inventario predeterminado
-      const defaultInventario: CreateInventarioDto = {
-        item: 'Producto Predeterminado',
-        codigo: 'DEFAULT001',
-        cantidad: 100,
-        localizacion: 'Almacén Central',
-        unidadMedida: 'Unidad',
-        ubicacion: 'Estante A1',
-      };
+  //   if (!inventarioExists) {
+  //     // Si no existe, crea un inventario predeterminado
+  //     const defaultInventario: CreateInventarioDto = {
+  //       item: 'Producto Predeterminado',
+  //       codigo: 'DEFAULT001',
+  //       cantidad: 100,
+  //       localizacion: 'Almacén Central',
+  //       unidadMedida: 'Unidad',
+  //       ubicacion: 'Estante A1',
+  //     };
 
-      await this.create(defaultInventario);
-    }
-  }
+  //     await this.create(defaultInventario);
+  //   }
+  // }
 
   // Crear un nuevo inventario
   async create(createInventarioDto: CreateInventarioDto) {

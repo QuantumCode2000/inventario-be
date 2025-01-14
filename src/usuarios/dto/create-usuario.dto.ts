@@ -31,7 +31,7 @@ export class CreateUsuarioDto {
   password: string;
 
   @IsString()
-  @Length(1, 20)
+  @Length(1, 50)
   cargo: string;
 
   @IsString()
