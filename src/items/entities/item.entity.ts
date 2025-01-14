@@ -30,6 +30,9 @@ export class Item {
   @Column({ type: 'text', nullable: true })
   observaciones: string; // Notas u observaciones opcionales
 
+  @Column('decimal', { precision: 10, scale: 2 })
+  cantidad: number; // Cantidad en inventario, tipo decimal (permitiendo fracciones como 0.5 litros, 1.25 kg, etc.)
+
   @CreateDateColumn()
   createdAt: Date; // Fecha de creación (automático)
 
