@@ -30,6 +30,9 @@ export class Inventario {
   @Column({ nullable: true })
   unidadMedida: string; // Unidad de medida (ej. Litros, Kilos, Unidades)
 
+  @Column({ type: 'text', nullable: true })
+  descripcion: string; // Descripción detallada del item (opcional)
+
   @CreateDateColumn()
   createdAt: Date; // Fecha de creación (automático)
 

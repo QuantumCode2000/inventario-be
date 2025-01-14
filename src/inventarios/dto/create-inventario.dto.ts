@@ -4,6 +4,7 @@ import {
   IsNumber,
   Min,
   MaxLength,
+  Length,
 } from 'class-validator';
 
 export class CreateInventarioDto {
@@ -18,6 +19,11 @@ export class CreateInventarioDto {
   @IsNumber()
   @Min(0)
   cantidad: number;
+
+  @IsString()
+  @IsOptional()
+  @Length(0, 500)
+  descripcion?: string; // Descripción opcional, max 500 caracteres
 
   @IsString()
   @MaxLength(50) // Máxima longitud para las observaciones
