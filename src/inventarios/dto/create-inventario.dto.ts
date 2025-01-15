@@ -9,11 +9,13 @@ import {
 
 export class CreateInventarioDto {
   @IsString()
-  @MaxLength(100) // Máxima longitud para el nombre del item (ajustable)
+  @MaxLength(100) 
+  // Máxima longitud para el nombre del item (ajustable)
   item: string;
 
   @IsString()
-  @MaxLength(50) // Máxima longitud para el código (ajustable)
+  @MaxLength(50) 
+  // Máxima longitud para el código (ajustable)
   codigo: string;
 
   @IsNumber()
@@ -23,18 +25,22 @@ export class CreateInventarioDto {
   @IsString()
   @IsOptional()
   @Length(0, 500)
-  descripcion?: string; // Descripción opcional, max 500 caracteres
+  descripcion?: string; 
+  // Descripción opcional, max 500 caracteres
 
   @IsString()
-  @MaxLength(50) // Máxima longitud para las observaciones
+  @MaxLength(50) 
+  // Máxima longitud para las observaciones
   unidadMedida;
 
   @IsString()
-  @MaxLength(100) // Máxima longitud para la localización
+  @MaxLength(100) 
+  // Máxima longitud para la localización
   localizacion: string;
 
   @IsOptional()
   @IsString()
-  @MaxLength(100) // Longitud opcional para la ubicación
+  @MaxLength(100) 
+  // Longitud opcional para la ubicación
   ubicacion?: string;
 }

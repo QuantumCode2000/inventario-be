@@ -135,7 +135,7 @@ export class ItemsService implements OnModuleInit {
 
   // Crear un nuevo item y registrar su inventario
   async create(createItemDto: CreateItemDto) {
-    const { codigo, nombre, unidadMedida, cantidad, descripcion } =
+    const { codigo, nombre, unidadMedida, cantidad, descripcion, categoria } =
       createItemDto;
 
     const existingItem = await this.itemsRepository.findOne({
@@ -159,7 +159,7 @@ export class ItemsService implements OnModuleInit {
       cantidad: cantidad, // Cantidad inicial en el inventario
       unidadMedida: unidadMedida,
       descripcion: descripcion,
-      localizacion: 'Almacén',
+      localizacion: categoria,
       ubicacion: 'Estante',
     };
 
