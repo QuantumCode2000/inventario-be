@@ -1,7 +1,6 @@
 import {
   Injectable,
   ConflictException,
-  OnModuleInit,
   NotFoundException,
 } from '@nestjs/common';
 import { CreateInventarioDto } from './dto/create-inventario.dto';

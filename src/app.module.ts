@@ -1,12 +1,9 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { UsuariosModule } from './usuarios/usuarios.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { InventariosModule } from './inventarios/inventarios.module';
-import { PedidosModule } from './pedidos/pedidos.module';
 import { ItemsModule } from './items/items.module';
 import { SalidasModule } from './salidas/salidas.module';
 import { EntradasModule } from './entradas/entradas.module';
@@ -30,7 +27,6 @@ import { EntradasModule } from './entradas/entradas.module';
     }),
     AuthModule,
     InventariosModule,
-    PedidosModule,
     ItemsModule,
     SalidasModule,
     EntradasModule,
