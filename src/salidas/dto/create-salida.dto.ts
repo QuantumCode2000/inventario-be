@@ -4,6 +4,7 @@ import {
   IsOptional,
   IsNotEmpty,
   Min,
+  IsDateString,
 } from 'class-validator';
 
 // DTO para la creación de una salida en el inventario
@@ -28,6 +29,7 @@ export class CreateSalidaDto {
   @IsNotEmpty()
   sacadoPor: string; // Quién saca el ítem del inventario
 
+  @IsOptional()
   @IsString()
   @IsNotEmpty()
   motivo: string; // Motivo de la salida (por ejemplo, préstamo, venta, etc.)
@@ -43,4 +45,8 @@ export class CreateSalidaDto {
   @IsOptional()
   @IsString()
   entregadoPor?: string; // Quién entrega el ítem (opcional, si aplica en el flujo de salida)
+
+  @IsOptional()
+  @IsDateString()
+  createdAt?: string; // Fecha de creación (automático)
 }

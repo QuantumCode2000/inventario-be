@@ -5,6 +5,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   DeleteDateColumn,
+  BeforeInsert,
 } from 'typeorm';
 
 @Entity()
@@ -27,7 +28,7 @@ export class Salida {
   @Column({ nullable: false })
   sacadoPor: string; // Quién saca el ítem del inventario
 
-  @Column({ nullable: false })
+  @Column({ nullable: true })
   motivo: string; // Motivo de la salida (prestado, vendido, transferido, etc.)
 
   @Column({ nullable: false })
@@ -39,12 +40,19 @@ export class Salida {
   @Column({ nullable: true })
   unidadMedida: string; // Unidad de medida (ej. Litros, Kilos, Unidades)
 
-  @CreateDateColumn()
-  createdAt: Date; // Fecha de creación (automático)
+  @Column({ type: 'timestamp', nullable: true })
+  createdAt: Date;
 
   @UpdateDateColumn()
   updatedAt: Date; // Fecha de última actualización (automático)
 
   @DeleteDateColumn()
   deletedAt: Date; // Fecha de eliminación lógica (automático)
+
+  @BeforeInsert()
+  setDefaultCreatedAt() {
+    if (!this.createdAt) {
+      this.createdAt = new Date();
+    }
+  }
 }
